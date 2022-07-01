@@ -1,62 +1,95 @@
 import 'package:audioplayer/audioplayer.dart';
 import 'package:flutter/material.dart';
+import 'package:staj_learn_page/models/animal_sounds.dart';
 import 'custom_sized_box.dart';
 
-class CustomBox extends StatelessWidget {
+class CustomBox extends StatefulWidget {
 
-  final String firstImage;
-  final String secondImage;
-  final String leftAudio;
-  final String rightAudio;
-
-  const CustomBox({required this.firstImage,required this.secondImage,required this.leftAudio,required this.rightAudio,Key? key}) : super(key: key);
+  const CustomBox({Key? key}) : super(key: key);
 
   @override
+  State<CustomBox> createState() => _CustomBoxState();
+}
+
+class _CustomBoxState extends State<CustomBox> {
+  @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        buildCategory(context, Colors.transparent,
-            firstImage, leftAudio),
-        buildCategory(context, Colors.transparent,
-            secondImage, rightAudio)
-      ],
+    return Center(
+      //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: buildCategory(context),
+      ),
+        //buildCategory(context, Colors.transparent,
+          //  secondImage, rightAudio)
     );
   }
 
-
-  Widget buildCategory(BuildContext context, Color primaryColor,
-      String imagePath, String audio) {
+  Widget buildCategory(BuildContext context) {
 
     AudioPlayer audioPlayer = AudioPlayer();
+    int listIndex= 0;
 
-    return SizedBox(
-        width: MediaQuery.of(context).size.width * 0.42,
-        height: MediaQuery.of(context).size.width * 0.42,
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            primary: primaryColor,
-            onPrimary: Colors.black,
-            shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-          ),
-          onPressed: () {
-            audioPlayer.play(audio);
-          },
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Image.asset(
-                imagePath,
-                height: 100,
-              ),
-              const CustomSizedBox(width: 0, height: 10),
-            ],
-          ),
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(0, 60, 0, 0),
+          child: Image.asset(AnimalSound.getAllAnimalSound().elementAt(listIndex).imagePath,height: 250,),
         ),
-      );
 
+        Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(50, 200, 0, 0),
+              child: TextButton(
+                  style: TextButton.styleFrom(
+
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0)
+                    ),
+                  ),
+                  onPressed:(){
+                    if(listIndex != 0){
+                      listIndex--;
+                    }
+                  } ,
+                  child: const Icon(Icons.arrow_back_ios_new_outlined, color: Colors.grey,)),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(30, 200, 0, 0),
+              child: TextButton(
+                  style: TextButton.styleFrom(
+
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0)
+                    ),
+                  ),
+                  onPressed:(){
+                    audioPlayer.play(AnimalSound.getAllAnimalSound().elementAt(listIndex).soundLink);
+                  } ,
+                  child: Image.asset("assets/hoporlor.png",height: 50,),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(30, 200, 0, 0),
+              child: TextButton(
+                  style: TextButton.styleFrom(
+
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0)
+                    ),
+                  ),
+                  onPressed:(){
+                    if(listIndex != 9){
+                      listIndex++;
+                    }
+                  } ,
+                  child: const Icon(Icons.arrow_forward_ios_outlined, color: Colors.grey,)),
+            )
+          ],
+        )
+      ]
+    );
 
   }
-
 }
