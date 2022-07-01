@@ -12,6 +12,14 @@ class CustomBox extends StatefulWidget {
 }
 
 class _CustomBoxState extends State<CustomBox> {
+  int listIndex= 0;
+  int index = 0;
+  void changeImage(int _index){
+    setState(() {
+      listIndex = _index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -20,15 +28,12 @@ class _CustomBoxState extends State<CustomBox> {
         padding: const EdgeInsets.all(20.0),
         child: buildCategory(context),
       ),
-        //buildCategory(context, Colors.transparent,
-          //  secondImage, rightAudio)
     );
   }
 
   Widget buildCategory(BuildContext context) {
 
-    AudioPlayer audioPlayer = AudioPlayer();
-    int listIndex= 0;
+    AudioPlayer? audioPlayer = AudioPlayer();
 
     return Column(
       children: [
@@ -43,17 +48,19 @@ class _CustomBoxState extends State<CustomBox> {
               padding: const EdgeInsets.fromLTRB(50, 200, 0, 0),
               child: TextButton(
                   style: TextButton.styleFrom(
-
+                    backgroundColor: Colors.orangeAccent,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.0)
                     ),
                   ),
                   onPressed:(){
-                    if(listIndex != 0){
-                      listIndex--;
+                    if(index != 0){
+                      audioPlayer.stop();
+                      index--;
+                      changeImage(index);
                     }
                   } ,
-                  child: const Icon(Icons.arrow_back_ios_new_outlined, color: Colors.grey,)),
+                  child: const Icon(Icons.arrow_back_ios_new_outlined, color: Colors.white,)),
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(30, 200, 0, 0),
@@ -65,7 +72,7 @@ class _CustomBoxState extends State<CustomBox> {
                     ),
                   ),
                   onPressed:(){
-                    audioPlayer.play(AnimalSound.getAllAnimalSound().elementAt(listIndex).soundLink);
+                    audioPlayer.play(AnimalSound?.getAllAnimalSound().elementAt(listIndex).soundLink);
                   } ,
                   child: Image.asset("assets/hoporlor.png",height: 50,),
               ),
@@ -74,17 +81,19 @@ class _CustomBoxState extends State<CustomBox> {
               padding: const EdgeInsets.fromLTRB(30, 200, 0, 0),
               child: TextButton(
                   style: TextButton.styleFrom(
-
+                    backgroundColor: Colors.orangeAccent,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0)
                     ),
                   ),
                   onPressed:(){
-                    if(listIndex != 9){
-                      listIndex++;
+                    if(index != 9){
+                      audioPlayer.stop();
+                      index++;
+                      changeImage(index);
                     }
                   } ,
-                  child: const Icon(Icons.arrow_forward_ios_outlined, color: Colors.grey,)),
+                  child: const Icon(Icons.arrow_forward_ios_outlined, color: Colors.white,)),
             )
           ],
         )
