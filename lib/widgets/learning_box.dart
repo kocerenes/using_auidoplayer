@@ -4,7 +4,9 @@ import 'package:staj_learn_page/models/animal_sounds.dart';
 
 class CustomBox extends StatefulWidget {
 
-  const CustomBox({Key? key}) : super(key: key);
+  final List<dynamic> allAnimalSound;
+
+  const CustomBox(this.allAnimalSound, {Key? key}) : super(key: key);
 
   @override
   State<CustomBox> createState() => _CustomBoxState();
@@ -44,18 +46,18 @@ class _CustomBoxState extends State<CustomBox> {
       //mainAxisAlignment: MainAxisAlignment.spaceBetween,
       child: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: buildCategory(context),
+        child: buildCategory(context,widget.allAnimalSound),
       ),
     );
   }
 
-  Widget buildCategory(BuildContext context) {
+  Widget buildCategory(BuildContext context, List list) {
 
     return Column(
       children: [
         Padding(
           padding: const EdgeInsets.fromLTRB(0, 60, 0, 0),
-          child: Image.asset(AnimalSound.getAllAnimalSound().elementAt(listIndex).imagePath,height: 250,),
+          child: Image.asset(list.elementAt(listIndex).imagePath,height: 250,),
         ),
 
         Row(
@@ -88,7 +90,7 @@ class _CustomBoxState extends State<CustomBox> {
                     ),
                   ),
                   onPressed:(){
-                    playMusic(AnimalSound.getAllAnimalSound().elementAt(listIndex).soundLink);
+                    playMusic(list.elementAt(listIndex).soundLink);
                     //AnimalSound.getAllAnimalSound().elementAt(listIndex).soundLink
                   } ,
                   child: Image.asset("assets/hoporlor.png",height: 50,),
@@ -104,7 +106,7 @@ class _CustomBoxState extends State<CustomBox> {
                     ),
                   ),
                   onPressed:(){
-                    if(index != 9){
+                    if(index != list.length-1){
                       stopMusic();
                       index++;
                       changeImage(index);

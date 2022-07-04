@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:staj_learn_page/widgets/learning_box.dart';
 
+import '../models/animal_sounds.dart';
+
 
 class LearningAnimals extends StatefulWidget {
   const LearningAnimals({Key? key}) : super(key: key);
@@ -17,7 +19,7 @@ class _LearningAnimalsState extends State<LearningAnimals> {
         title: const Text("Hayvanlar Alemi"),
         backgroundColor: Colors.orange,
       ),
-      body: const CustomBox(),
+      body: CustomBox(AnimalSound.getAllAnimalSound()),
     );
   }
 

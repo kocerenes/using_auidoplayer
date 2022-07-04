@@ -4,8 +4,8 @@ class AnimalSound{
 
   AnimalSound(this.imagePath,this.soundLink);
 
-  static List<AnimalSound> getAllAnimalSound(){
-    List<AnimalSound> list = List.filled(10, AnimalSound('',""));
+  static List getAllAnimalSound(){
+    List list = List.filled(10, AnimalSound('',""));
 
     list[0] = AnimalSound('assets/karga.png',"animalsound/karga.mp3");
     list[1] = AnimalSound('assets/at.png',"animalsound/horse.mp3");
