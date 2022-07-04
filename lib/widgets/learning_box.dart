@@ -1,7 +1,6 @@
-import 'package:audioplayer/audioplayer.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:staj_learn_page/models/animal_sounds.dart';
-import 'custom_sized_box.dart';
 
 class CustomBox extends StatefulWidget {
 
@@ -12,6 +11,25 @@ class CustomBox extends StatefulWidget {
 }
 
 class _CustomBoxState extends State<CustomBox> {
+
+  AudioPlayer audioPlayer = AudioPlayer();
+  late AudioCache audioCache;
+
+  @override
+  void dispose(){
+    super.dispose();
+    audioPlayer.release();
+    audioPlayer.dispose();
+  }
+
+  playMusic(String link) async{
+    await audioPlayer.play(AssetSource(link));
+  }
+
+  stopMusic() async{
+    await audioPlayer.stop();
+  }
+
   int listIndex= 0;
   int index = 0;
   void changeImage(int _index){
@@ -33,8 +51,6 @@ class _CustomBoxState extends State<CustomBox> {
 
   Widget buildCategory(BuildContext context) {
 
-    AudioPlayer? audioPlayer = AudioPlayer();
-
     return Column(
       children: [
         Padding(
@@ -55,7 +71,7 @@ class _CustomBoxState extends State<CustomBox> {
                   ),
                   onPressed:(){
                     if(index != 0){
-                      audioPlayer.stop();
+                      stopMusic();
                       index--;
                       changeImage(index);
                     }
@@ -72,7 +88,8 @@ class _CustomBoxState extends State<CustomBox> {
                     ),
                   ),
                   onPressed:(){
-                    audioPlayer.play(AnimalSound?.getAllAnimalSound().elementAt(listIndex).soundLink);
+                    playMusic(AnimalSound.getAllAnimalSound().elementAt(listIndex).soundLink);
+                    //AnimalSound.getAllAnimalSound().elementAt(listIndex).soundLink
                   } ,
                   child: Image.asset("assets/hoporlor.png",height: 50,),
               ),
@@ -88,7 +105,7 @@ class _CustomBoxState extends State<CustomBox> {
                   ),
                   onPressed:(){
                     if(index != 9){
-                      audioPlayer.stop();
+                      stopMusic();
                       index++;
                       changeImage(index);
                     }

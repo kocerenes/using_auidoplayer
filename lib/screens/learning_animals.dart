@@ -17,7 +17,7 @@ class _LearningAnimalsState extends State<LearningAnimals> {
         title: const Text("Hayvanlar Alemi"),
         backgroundColor: Colors.orange,
       ),
-      body: CustomBox(),
+      body: const CustomBox(),
     );
   }
 
