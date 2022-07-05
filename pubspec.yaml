@@ -62,6 +62,23 @@ flutter:
   assets:
     - assets/
     - assets/animalsound/
+    - assets/animalimage/
+    - assets/fruitsound/
+    - assets/fruitimage/
+    - assets/shapessound/
+    - assets/shapesimage/
+    - assets/vehiclesound/
+    - assets/vehicleimage/
+    - assets/jobsound/
+    - assets/jobimage/
+    - assets/weathersound/
+    - assets/weatherimage/
+    - assets/colorsound/
+    - assets/colorimage/
+    - assets/numbersound/
+    - assets/numberimage/
+    - assets/sportsound/
+    - assets/sportimage/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
